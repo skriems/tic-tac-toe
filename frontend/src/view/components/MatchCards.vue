@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import { store } from "../../store";
+import { winnerMessage } from "../../matches/winnerMessage";
 </script>
 
 <template>
@@ -13,6 +14,7 @@ import { store } from "../../store";
     >
       <div class="card">
         <h3>{{ match.player_x ?? "?" }} vs. {{ match.player_o ?? "?" }}</h3>
+        <em v-if="match.winner">{{ winnerMessage(match) }}</em>
       </div>
     </RouterLink>
   </div>

@@ -1,8 +1,20 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { createMatch } from "../../integrations/createMatch";
 import { store } from "../../store";
 import MatchCards from "../components/MatchCards.vue";
+
+const count = computed(() => {
+  const count = {
+    x: 0,
+    o: 0,
+  };
+  for (const match of store.matches) {
+    if (match.winner === "x") count.x++;
+    if (match.winner === "o") count.o++;
+  }
+  return count;
+});
 
 const loading = ref(true);
 
@@ -20,9 +32,9 @@ onMounted(() => {
 <template>
   <div class="container">
     <h1>tic-tac-toe</h1>
+    <h2 v-if="store.playerName">Hello {{ store.playerName }}</h2>
+    <h4 class="stats">Team X {{ count.x }} : {{ count.o }} Team O</h4>
     <div v-if="loading" class="loading">Loading...</div>
-    <p v-if="store.matches.length === 0">No matches yet</p>
-    <span>connected: {{ store.connected }}</span>
     <MatchCards />
     <button @click="createMatch">Create Match</button>
   </div>
