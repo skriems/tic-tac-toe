@@ -51,15 +51,11 @@ export type MoveMessage = {
   value: string;
   matchId: string;
   playerName: string;
-  board: string[];
 };
 
-type MoveDoneMessage = {
+export type MoveDoneMessage = {
   type: "moveDone";
-  value: string;
-  matchId: string;
-  playerName: string;
-  board: string[];
+  match: DBMatch;
 };
 
 type ResultMessage = {

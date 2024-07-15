@@ -2,12 +2,12 @@ import { updateMatch } from "../database/memory";
 import type { Board, DBMatch, MoveMessage } from "../types";
 import { isWinner, winnerMessage } from "./isWinner";
 
-const isPlaying = <T extends { player_x?: string; player_o?: string }>(
+export const isPlaying = <T extends { player_x?: string; player_o?: string }>(
   match: T,
   player: string,
 ) => match.player_x === player || match.player_o === player;
 
-const isValidTeam = <T extends { player_x?: string; player_o?: string }>(
+export const isValidTeam = <T extends { player_x?: string; player_o?: string }>(
   match: T,
   player: string,
   team: string,
@@ -15,7 +15,7 @@ const isValidTeam = <T extends { player_x?: string; player_o?: string }>(
   (match.player_x === player && team === "x") ||
   (match.player_o === player && team === "o");
 
-const isDone = (board: Board) => !board.includes(null);
+export const isDone = (board: Board) => !board.includes(null);
 
 export function handleMove(msg: MoveMessage, match: DBMatch) {
   if (isDone(match.board)) {
