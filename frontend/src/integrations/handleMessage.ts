@@ -15,6 +15,10 @@ export function handleMessage(ws: ws, event: MessageEvent, store: Store) {
         ws.send(JSON.stringify({ type: "pong" }));
         break;
       }
+      case "matchCreated": {
+        store.matches.push(msg.match);
+        break;
+      }
       default:
         console.log("unknown message:", event.data);
     }
