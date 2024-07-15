@@ -6,10 +6,16 @@ const clients: Record<string, ws> = {};
 
 wss.on("connection", (ws) => {
   console.log("Client connected. Sending ping...");
+  sendMessage(JSON.stringify({ type: "ping" }), ws);
   ws.send(JSON.stringify({ type: "ping" }));
   ws.on("message", (msg) => ws.send(msg));
   ws.on("close", (n) => console.log("Client disconnected. Code:", n));
 });
+
+const sendMessage = (message: string, ws: ws) => {
+  console.log("Sending message:", message);
+  ws.send(message, handleError(ws));
+};
 
 export const broadcast = (message: string) => {
   wss.clients.forEach((client) => {
