@@ -8,7 +8,7 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "start": "node dist/app.js",
-    "start:watch": "nodemon dist/app.js",
+    "start:watch": "nodemon --inspect dist/app.js",
     "test": "vitest run",
     "test:watch": "vitest"
   },
