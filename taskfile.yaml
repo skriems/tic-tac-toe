@@ -1,0 +1,26 @@
+version: "3"
+
+includes:
+  docker:
+    taskfile: ./taskfiles/docker.yaml
+  frontend:
+    taskfile: ./frontend
+    dir: ./frontend
+  backend:
+    taskfile: ./backend
+    dir: ./backend
+
+tasks:
+  # when you first want to spin up the project
+  setup:
+    - task: frontend:install
+    - task: backend:install
+  # spin up the dev
+  dev:
+    - task: docker:watch
+  down:
+    - task: docker:down
+  # cleanup and start from scratch
+  test:
+    - task: frontend:test
+    - task: backend:test

@@ -1,0 +1,7 @@
+version: "3"
+
+tasks:
+  install:
+    - npm install
+  test:
+    - npm run test
