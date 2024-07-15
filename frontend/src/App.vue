@@ -11,6 +11,7 @@ import { RouterView } from "vue-router";
 <style scoped>
 main {
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
 }
 

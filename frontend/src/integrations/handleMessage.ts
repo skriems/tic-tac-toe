@@ -19,7 +19,7 @@ export function handleMessage(ws: ws, event: MessageEvent, store: Store) {
         store.playerName = msg.name;
         break;
       case "matchCreated": {
-        store.matches.push(msg.match);
+        store.matches.unshift(msg.match);
         break;
       }
       case "moveDone": {

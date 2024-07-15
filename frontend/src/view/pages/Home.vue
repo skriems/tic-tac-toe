@@ -30,13 +30,16 @@ onMounted(() => {
 </script>
 
 <template>
+  <h1>Tic-Tac-Toe</h1>
   <div class="container">
-    <h1>tic-tac-toe</h1>
     <h2 v-if="store.playerName">Hello {{ store.playerName }}</h2>
-    <h4 class="stats">Team X {{ count.x }} : {{ count.o }} Team O</h4>
-    <div v-if="loading" class="loading">Loading...</div>
-    <MatchCards />
+    <div class="stats">
+      <span>Team X: {{ count.x }} wins</span>
+      <span>Team O: {{ count.o }} wins</span>
+    </div>
+    <div v-if="loading" class="loading">Loading Matches...</div>
     <button @click="createMatch">Create Match</button>
+    <MatchCards />
   </div>
 </template>
 
@@ -45,6 +48,9 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.stats span {
+  display: block;
 }
 </style>
 <!-- <style scoped> -->
