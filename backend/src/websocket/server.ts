@@ -3,7 +3,7 @@ import { onMessage } from "./onMessage";
 
 export const wss = new ws.Server({ noServer: true });
 
-const clients: Record<string, ws> = {};
+export const clients: Record<string, ws> = {};
 
 wss.on("connection", (ws) => {
   console.log("Client connected");
