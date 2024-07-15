@@ -1,6 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { store } from "../../store";
+</script>
 
-<template>Hello World</template>
+<template>
+  <h1>tic-tac-toe</h1>
+  <span>connected: {{ store.connected }}</span>
+</template>
 
 <!-- <style scoped> -->
 <!-- .logo { -->
