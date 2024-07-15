@@ -1,20 +1,21 @@
-FROM node:20-alpine AS base
+ARG NODE_VERSION=20
 
-FROM base as deps
+FROM node:${NODE_VERSION}-alpine as base
 WORKDIR /app
-COPY . .
-RUN npm install
+EXPOSE 3000
 
-FROM deps AS dev
-WORKDIR /app
+FROM base as dev
+RUN --mount=type=bind,source=package.json,target=package.json \
+  --mount=type=bind,source=package-lock.json,target=package-lock.json \
+  --mount=type=cache,target=/root/.npm \
+  npm ci --include=dev
 COPY . .
-COPY --from=deps /app/node_modules /app/node_modules
+CMD ["npm", "run","dev"]
 
-FROM deps AS build
-WORKDIR /app
+FROM base as prod
+RUN --mount=type=bind,source=package.json,target=package.json \
+  --mount=type=bind,source=package-lock.json,target=package-lock.json \
+  --mount=type=cache,target=/root/.npm \
+  npm ci --omit=dev
 COPY . .
-COPY --from=deps /app/node_modules /app/node_modules
-RUN npm run build
-
-EXPOSE 8000
-CMD [ "npm", "start" ]
+CMD ["node", "dist/app.js"]
