@@ -6,7 +6,7 @@ RUN corepack enable
 FROM base AS deps
 COPY . /app
 WORKDIR /app
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 
 FROM deps AS dev
 WORKDIR /app
