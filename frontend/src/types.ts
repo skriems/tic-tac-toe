@@ -16,4 +16,9 @@ type PongMessage = {
   type: "pong";
 };
 
-export type Message = PingMessage | PongMessage;
+type MatchCreatedMessage = {
+  type: "matchCreated";
+  match: DBMatch;
+};
+
+export type Message = PingMessage | PongMessage | MatchCreatedMessage;
