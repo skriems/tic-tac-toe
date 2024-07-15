@@ -5,7 +5,7 @@ import { store } from "../../store";
 import Cell from "./Cell.vue";
 import { activePlayer } from "../../matches/activePlayer";
 import { winnerMessage } from "../../matches/winnerMessage";
-import type { Board } from "../../types";
+import type { Board, MoveMessage } from "../../types";
 
 const props = defineProps<{
   matchId: string;
@@ -36,7 +36,7 @@ function handleClick(index: number) {
       matchId: match.id,
       value: `${activeTeam.value.toLowerCase()}:${index}`,
       playerName: store.playerName,
-    });
+    } satisfies MoveMessage);
     store.sendMessage(msg);
   }
 }
